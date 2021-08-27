@@ -8,6 +8,11 @@ export enum ButtonVariety {
   DELETE = 'delete',
 }
 
+export enum ButtonSize {
+  REGULAR = 'regular',
+  SMALL = 'small',
+}
+
 interface Props extends StyledProps {
   text: string;
   onClick: React.MouseEventHandler;
@@ -15,19 +20,25 @@ interface Props extends StyledProps {
 
 interface StyledProps {
   variety?: ButtonVariety;
+  size?: ButtonSize;
 }
 
-const Button = ({ text, variety = ButtonVariety.REGULAR, onClick }: Props): JSX.Element => (
-  <StyledButton onClick={onClick} variety={variety}>
+const Button = ({
+  text,
+  variety = ButtonVariety.REGULAR,
+  size = ButtonSize.REGULAR,
+  onClick,
+}: Props): JSX.Element => (
+  <StyledButton onClick={onClick} variety={variety} size={size}>
     {text}
   </StyledButton>
 );
 
 const StyledButton = styled.button<StyledProps>`
-  min-width: 100px;
-  padding: 12px;
-  background: ${({ color }) => {
-    switch (color) {
+  min-width: ${({ size }) => size === ButtonSize.REGULAR && '100px'};
+  padding: ${({ size }) => size === ButtonSize.SMALL ? '6px 8px' : '12px'};
+  background: ${({ variety }) => {
+    switch (variety) {
       case ButtonVariety.REGULAR:
         return colors.purple;
       case ButtonVariety.SECONDARY:
@@ -36,8 +47,8 @@ const StyledButton = styled.button<StyledProps>`
         return colors.red;
     }
   }};
-  font-size: 17px;
-  line-height: 24px;
+  font-size: ${({ size }) => size === ButtonSize.SMALL ? '14px' : '17px'};
+  line-height: ${({ size }) => size === ButtonSize.SMALL ? '16px' : '24px'};
   text-align: center;
   color: ${colors.whiteNatural};
   border: none;
@@ -47,8 +58,8 @@ const StyledButton = styled.button<StyledProps>`
   transition-property: background, box-shadow;
 
   :hover {
-    background: ${({ color }) => {
-    switch (color) {
+    background: ${({ variety }) => {
+    switch (variety) {
       case ButtonVariety.REGULAR:
         return colors.darkPurple;
       case ButtonVariety.SECONDARY:

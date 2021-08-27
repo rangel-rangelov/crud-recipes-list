@@ -12,8 +12,8 @@ const Section = ({ children }: Props): JSX.Element => (
   </StyledSection>
 );
 
-const StyledSection = styled.div`
-  padding: 16px;
+const StyledSection = styled.section`
+  padding: 24px;
   background: ${colors.white};
   border-radius: ${others.borderRadiusBig};
 `;

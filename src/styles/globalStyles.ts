@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 17px;
     line-height: 24px;
     color: ${colors.midGrey};
-    background: ${colors.lightGrey};
+    background: ${colors.lighterGrey};
   }
 
   h1, h2, h3, h4, h5, h6 {

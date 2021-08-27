@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-import Section from 'components/Section';
 import GlobalStyle from 'styles/globalStyles';
+
+import Section from 'components/Section';
+import List from 'components/List';
 
 const App = (): JSX.Element => (
   <div>
     <GlobalStyle />
     <Title>Recipes list</Title>
-    <Section>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus, necessitatibus provident corporis minus saepe veniam voluptatum ex minima corrupti itaque aut cum porro qui ratione? Magnam eveniet exercitationem neque doloribus.</Section>
+    <Section>
+      <List />
+    </Section>
   </div>
 );
 
