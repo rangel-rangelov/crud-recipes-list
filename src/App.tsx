@@ -34,6 +34,7 @@ const Title = styled.h1`
     margin: 16px 0 0;
     width: 60px;
     height: 4px;
+    border-radius: 2px;
     background-color: ${colors.midGrey}
   }
 `;

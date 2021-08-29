@@ -35,7 +35,7 @@ const Button = ({
 );
 
 const StyledButton = styled.button<StyledProps>`
-  min-width: ${({ size }) => size === ButtonSize.REGULAR && '100px'};
+  min-width: ${({ size }) => size === ButtonSize.REGULAR ? '100px' : '60px'};
   padding: ${({ size }) => size === ButtonSize.SMALL ? '6px 8px' : '12px'};
   background: ${({ variety }) => {
     switch (variety) {

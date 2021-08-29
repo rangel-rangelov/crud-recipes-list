@@ -4,14 +4,16 @@ import { Recipes, Recipe, MOCK_DATA } from 'models/recipes';
 
 export interface IRecipesContext {
   recipes: Recipes | [],
-  openRecipe: Recipe | null,
+  expandedRecipeId: number | null,
   editRecipe: (id: number) => void,
+  expandRecipe: (id: number | null) => void,
 }
 
 const RecipesContext = createContext<IRecipesContext>({
   recipes: [],
-  openRecipe: null,
+  expandedRecipeId: null,
   editRecipe: () => {},
+  expandRecipe: () => {},
 });
 
 export const RecipesProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
@@ -20,13 +22,22 @@ export const RecipesProvider = ({ children }: { children: React.ReactNode }): JS
     // TODO: handle edit
   };
 
-  const recipesState = {
-    recipes: MOCK_DATA,
-    openRecipe: null,
-    editRecipe,
+  const expandRecipe = (id: number | null) => {
+    console.log(id);
+    setData(prevState => ({
+      ...prevState,
+      expandedRecipeId: id,
+    }));
   };
 
-  const [data, setData] = useState(recipesState);
+  const recipesState = {
+    recipes: MOCK_DATA,
+    expandedRecipeId: null,
+    editRecipe,
+    expandRecipe,
+  };
+
+  const [data, setData] = useState<IRecipesContext>(recipesState);
 
   return (
     <RecipesContext.Provider value={data}>

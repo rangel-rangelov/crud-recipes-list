@@ -13,7 +13,10 @@ interface Props extends StyledProps {
   id: number
   title: string;
   description: string;
+  expanded?: boolean;
+  details: Array<string>;
   onDelete: (id: number) => void;
+  onDetails: (id: number | null) => void;
 }
 
 interface StyledProps {
@@ -24,27 +27,40 @@ const ListItem = ({
   id,
   title,
   description,
+  expanded = false,
+  details,
   type = ListItemType.PRIMARY,
   onDelete,
+  onDetails,
 }: Props): JSX.Element => (
-  <StyledListItem type={type}>
-    <Title>{title}</Title>
-    <Description>{description}</Description>
-    <ButtonHolder>
-      <Button
-        text="Delete"
-        variety={ButtonVariety.DELETE}
-        onClick={() => onDelete(id)}
-        size={ButtonSize.SMALL}
-      />
-      <Button
-        text="Expand"
-        variety={ButtonVariety.SECONDARY}
-        size={ButtonSize.SMALL}
-        onClick={() =>  console.log('here')}
-      />
-    </ButtonHolder>
-  </StyledListItem>
+  <>
+    <StyledListItem type={type}>
+      <Title>{title}</Title>
+      <Description>{description}</Description>
+      <ButtonHolder>
+        <Button
+          text="Delete"
+          variety={ButtonVariety.DELETE}
+          onClick={() => onDelete(id)}
+          size={ButtonSize.SMALL}
+        />
+        <Button
+          text={!expanded ? 'Details' : 'Close'}
+          variety={ButtonVariety.SECONDARY}
+          size={ButtonSize.SMALL}
+          onClick={() =>  onDetails(!expanded ? id : null)}
+        />
+      </ButtonHolder>
+    </StyledListItem>
+    { expanded && 
+      <Details>
+        <DetailsTitle>Other ingerdients</DetailsTitle>
+        {
+          details.map((item, index) => ( `${item}${details.length !== index + 1 ? ', ' : ''}` ))
+        }
+      </Details>
+    }
+  </>
 );
 
 const StyledListItem = styled.div<StyledProps>`
@@ -52,8 +68,8 @@ const StyledListItem = styled.div<StyledProps>`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-bottom: 1px solid ${colors.lighterGrey};
   padding: 4px 24px;
+  border-bottom: 1px solid ${colors.lighterGrey};
   box-shadow: ${({ type }) => {
     switch (type) {
       case ListItemType.PRIMARY:
@@ -99,6 +115,19 @@ const ButtonHolder = styled.div`
       margin-right: 0;
     }
   }
+`;
+
+const Details = styled.div`
+  width: 100%;
+  padding: 8px 24px;
+  font-size: 12px;
+  line-height: 16px;
+`;
+
+const DetailsTitle = styled.h4`
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 18px;
 `;
 
 export default ListItem;
