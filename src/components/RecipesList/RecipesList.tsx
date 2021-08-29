@@ -15,6 +15,7 @@ const RecipesList = (): JSX.Element => {
     expandRecipe,
     openRecipeEdit,
     openRecipeAdd,
+    deleteRecipe,
   } = useContext(RecipesContext);
 
   const formatType = (type: DishType): ListItemType => {
@@ -33,7 +34,7 @@ const RecipesList = (): JSX.Element => {
   return (
     <StyledRecipesList>
       {
-        recipes.map(({
+        recipes && recipes.map(({
           id,
           name,
           mainIngredient,
@@ -45,7 +46,7 @@ const RecipesList = (): JSX.Element => {
             title={name}
             description={`Main ingredient: ${mainIngredient}`}
             details={ingredients}
-            onDelete={() => console.log(id)}
+            onDelete={() => deleteRecipe(id)}
             onDetails={(expandedId) => expandRecipe(expandedId)}
             onEdit={(editId) => openRecipeEdit(editId)}
             expanded={expandedRecipeId === id}

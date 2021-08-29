@@ -1,7 +1,8 @@
 import { createContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { Recipes, Recipe, MOCK_DATA } from 'models/recipes';
+import { Recipes, Recipe } from 'models/recipes';
+import { getFromStorage, updateStorage } from 'utils/localStorage';
 
 export interface IRecipesContext {
   recipes: Recipes | [],
@@ -12,6 +13,7 @@ export interface IRecipesContext {
   openRecipeAdd: () => void,
   editRecipe: (editedRecipe: Recipe, id: number) => void,
   addRecipe: (newRecipe: Recipe) => void,
+  deleteRecipe: (id: number) => void,
   expandRecipe: (id: number | null) => void,
   closeAddEditModal: () => void,
 }
@@ -25,6 +27,7 @@ const RecipesContext = createContext<IRecipesContext>({
   openRecipeAdd: () => {},
   editRecipe: () => {},
   addRecipe: () => {},
+  deleteRecipe: () => {},
   expandRecipe: () => {},
   closeAddEditModal: () => {},
 });
@@ -43,11 +46,12 @@ export const RecipesProvider = ({ children }: { children: React.ReactNode }): JS
   const openRecipeAdd = () => setData(prevState => ({ ...prevState, isAddEditModalOpen: true }));
 
   const editRecipe = (editedRecipe: Recipe, id: number) => {
-    console.log(id);
     setData(prevState => {
       const index = prevState.recipes.findIndex(recipe => recipe.id === id);
       const newRecipes = [...prevState.recipes];
       newRecipes[index] = editedRecipe;
+
+      updateStorage(newRecipes);
 
       return ({
         ...prevState,
@@ -65,6 +69,8 @@ export const RecipesProvider = ({ children }: { children: React.ReactNode }): JS
       const newRecipes = [...prevState.recipes];
       newRecipes.push(newRecipe);
 
+      updateStorage(newRecipes);
+
       return ({
         ...prevState,
         recipes: newRecipes,
@@ -74,6 +80,24 @@ export const RecipesProvider = ({ children }: { children: React.ReactNode }): JS
     });
 
     toast('Recipe added successfully!');
+  };
+
+  const deleteRecipe = (id: number) => {
+    setData(prevState => {
+      const index = prevState.recipes.findIndex(recipe => recipe.id === id);
+      const newRecipes = [ ...prevState.recipes];
+
+      newRecipes.splice(index, 1);
+
+      updateStorage(newRecipes);
+
+      return ({
+        ...prevState,
+        recipes: newRecipes,
+      });
+    });
+
+    toast('Recipe deleted successfully!');
   };
 
   const expandRecipe = (id: number | null) => setData(prevState => ({
@@ -89,7 +113,7 @@ export const RecipesProvider = ({ children }: { children: React.ReactNode }): JS
   
 
   const recipesState = {
-    recipes: MOCK_DATA,
+    recipes: getFromStorage(),
     expandedRecipeId: null,
     recipeEdited: null,
     isAddEditModalOpen: false,
@@ -98,6 +122,7 @@ export const RecipesProvider = ({ children }: { children: React.ReactNode }): JS
     openRecipeAdd,
     editRecipe,
     addRecipe,
+    deleteRecipe,
     expandRecipe,
     closeAddEditModal,
   };

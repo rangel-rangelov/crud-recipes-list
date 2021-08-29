@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
         <Modal heading={recipeEdited?.name || 'New recipe'} onClose={closeAddEditModal} isOpen={isAddEditModalOpen}>
           <RecipeForm
             onSubmit={recipeEdited ? editRecipe : addRecipe}
-            recipe={recipeEdited || { ...NEW_RECIPE, id: recipes[recipes.length - 1].id + 1 }}
+            recipe={recipeEdited || { ...NEW_RECIPE, id: recipes.length ? recipes[recipes.length - 1].id + 1 : 1 }}
           />
         </Modal>
         <ToastContainer position="bottom-right" />

@@ -22,7 +22,7 @@ const RecipeForm = ({ onSubmit, recipe }: Props): JSX.Element => {
   } = useForm<Inputs>({ defaultValues: { ...recipe } || {} });
 
   const ingredients = watch('ingredients');
-  console.log(ingredients);
+
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data, recipe.id))}>
       <Label htmlFor="id">ID</Label>
