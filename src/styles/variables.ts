@@ -10,7 +10,7 @@ export const colors = {
   darkPurple: '#8D50DE',
   red: '#E25061',
   darkRed: '#BF3B4B',
-  yellow: 'DBC900',
+  yellow: '#DBC900',
   green: '#2EBA88',
 };
 

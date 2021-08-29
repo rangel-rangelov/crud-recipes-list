@@ -51,6 +51,7 @@ const StyledListItem = styled.div<StyledProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   border-bottom: 1px solid ${colors.lighterGrey};
   padding: 4px 24px;
   box-shadow: ${({ type }) => {
@@ -64,18 +65,21 @@ const StyledListItem = styled.div<StyledProps>`
     }
   }};
   
-  &:last-child {
+  &:last-of-type {
     border-bottom: none;
+    margin-bottom: 32px;
   }
 `;
 
 const Title = styled.h3`
+  flex-basis: 40%;
   font-size: 17px;
   line-height: 24px;
   font-weight: 400;
 `;
 
 const Description = styled.h3`
+  flex-basis: 40%;
   font-size: 15px;
   line-height: 20px;
   font-weight: 400;
@@ -83,8 +87,9 @@ const Description = styled.h3`
 `;
 
 const ButtonHolder = styled.div`
+  flex-basis: 20%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
   > * {
