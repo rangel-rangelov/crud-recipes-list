@@ -7,8 +7,8 @@ export const colors = {
   midGrey: '#3A3A3A',
   darkGrey: '#191E24',
   opacityBlack: 'rgba(0, 0, 0, 0.6)',
-  purple: '#A96FF3',
-  darkPurple: '#8D50DE',
+  blue: '#337BE2',
+  darkBlue: '#215eb5',
   red: '#E25061',
   darkRed: '#BF3B4B',
   yellow: '#DBC900',
@@ -16,6 +16,7 @@ export const colors = {
 };
 
 export const others = {
+  fontFamily: "'Roboto', sans-serif",
   borderRadiusSmall: '6px',
   borderRadiusBig: '22px',
 };

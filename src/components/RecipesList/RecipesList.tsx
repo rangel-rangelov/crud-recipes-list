@@ -9,7 +9,12 @@ import Button from 'components/Button';
 
 
 const RecipesList = (): JSX.Element => {
-  const { recipes, expandedRecipeId, expandRecipe } = useContext(RecipesContext);
+  const {
+    recipes,
+    expandedRecipeId,
+    expandRecipe,
+    openRecipeEdit,
+  } = useContext(RecipesContext);
 
   const formatType = (type: DishType): ListItemType => {
     switch (type) {
@@ -41,6 +46,7 @@ const RecipesList = (): JSX.Element => {
             details={ingredients}
             onDelete={() => console.log(id)}
             onDetails={(expandedId) => expandRecipe(expandedId)}
+            onEdit={(editId) => openRecipeEdit(editId)}
             expanded={expandedRecipeId === id}
             type={formatType(dishType)}
             key={id}

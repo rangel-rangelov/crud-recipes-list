@@ -15,7 +15,8 @@ export enum ButtonSize {
 
 interface Props extends StyledProps {
   text: string;
-  onClick: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 interface StyledProps {
@@ -28,8 +29,9 @@ const Button = ({
   variety = ButtonVariety.REGULAR,
   size = ButtonSize.REGULAR,
   onClick,
+  type = 'button',
 }: Props): JSX.Element => (
-  <StyledButton onClick={onClick} variety={variety} size={size}>
+  <StyledButton type={type} onClick={onClick} variety={variety} size={size}>
     {text}
   </StyledButton>
 );
@@ -40,7 +42,7 @@ const StyledButton = styled.button<StyledProps>`
   background: ${({ variety }) => {
     switch (variety) {
       case ButtonVariety.REGULAR:
-        return colors.purple;
+        return colors.blue;
       case ButtonVariety.SECONDARY:
         return colors.midGrey;
       case ButtonVariety.DELETE:
@@ -61,7 +63,7 @@ const StyledButton = styled.button<StyledProps>`
     background: ${({ variety }) => {
     switch (variety) {
       case ButtonVariety.REGULAR:
-        return colors.darkPurple;
+        return colors.darkBlue;
       case ButtonVariety.SECONDARY:
         return colors.darkGrey;
       case ButtonVariety.DELETE:

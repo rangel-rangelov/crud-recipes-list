@@ -14,11 +14,13 @@ export enum DishType {
   VEGAN = 'vegan',
 }
 
+export const DISH_TYPES = ['regular', 'vegeterian', 'vegan'];
+
 export const MOCK_DATA: Recipes = [
   {
     id: 1,
     name: 'Spaghetti Bolognese',
-    mainIngredient: 'Pasta',
+    mainIngredient: 'Spaghetti',
     ingredients: ['Spaghetti', 'Tomato sauce', 'Minced meat'],
     dishType: DishType.REGULAR,
   },

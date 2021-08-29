@@ -16,6 +16,7 @@ interface Props extends StyledProps {
   expanded?: boolean;
   details: Array<string>;
   onDelete: (id: number) => void;
+  onEdit: (id: number) => void;
   onDetails: (id: number | null) => void;
 }
 
@@ -32,12 +33,18 @@ const ListItem = ({
   type = ListItemType.PRIMARY,
   onDelete,
   onDetails,
+  onEdit,
 }: Props): JSX.Element => (
   <>
     <StyledListItem type={type}>
       <Title>{title}</Title>
       <Description>{description}</Description>
       <ButtonHolder>
+        <Button
+          text="Edit"
+          onClick={() => onEdit(id)}
+          size={ButtonSize.SMALL}
+        />
         <Button
           text="Delete"
           variety={ButtonVariety.DELETE}

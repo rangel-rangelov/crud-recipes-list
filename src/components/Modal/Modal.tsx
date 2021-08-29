@@ -82,7 +82,7 @@ const ModalTitle = styled.h2`
 `;
 
 const ModalContent = styled.div`
-  padding: 0 32px;
+  padding: 16px 32px;
   background: ${colors.white};
 `;
 

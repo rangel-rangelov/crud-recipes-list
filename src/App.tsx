@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import GlobalStyle from 'styles/globalStyles';
 import { colors } from 'styles/variables';
@@ -6,22 +9,31 @@ import { colors } from 'styles/variables';
 import Section from 'components/Section';
 import RecipesList from 'components/RecipesList';
 import Modal from 'components/Modal';
+import RecipeForm from 'components/RecipeForm';
 
-import { RecipesProvider } from 'context/RecipesContext';
+import RecipesContext from 'context/RecipesContext';
 
 const App = (): JSX.Element => {
-
+  const {
+    isAddEditModalOpen,
+    closeAddEditModal,
+    recipeEdited,
+    editRecipe,
+  } = useContext(RecipesContext);
+  console.log(isAddEditModalOpen);
   return (
     <>
       <GlobalStyle />
       <Title>Recipes list</Title>
       <Section>
-        <RecipesProvider>
-          <RecipesList />
-          <Modal heading="Test" onClose={(event) => console.log(event)} isOpen={true}>
-            This is just a test
+        <RecipesList />
+        {
+          recipeEdited &&
+          <Modal heading={recipeEdited.name} onClose={closeAddEditModal} isOpen={isAddEditModalOpen}>
+            <RecipeForm onSubmit={editRecipe} recipe={recipeEdited}/>
           </Modal>
-        </RecipesProvider>
+        }
+        <ToastContainer position="bottom-right" />
       </Section>
     </>
   );
