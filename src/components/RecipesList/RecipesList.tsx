@@ -14,6 +14,7 @@ const RecipesList = (): JSX.Element => {
     expandedRecipeId,
     expandRecipe,
     openRecipeEdit,
+    openRecipeAdd,
   } = useContext(RecipesContext);
 
   const formatType = (type: DishType): ListItemType => {
@@ -53,7 +54,7 @@ const RecipesList = (): JSX.Element => {
           />
         ))
       }
-      <Button text="Add new recipe" onClick={() => console.log('here')} />
+      <Button text="Add new recipe" onClick={openRecipeAdd} />
     </StyledRecipesList>
   );
 };

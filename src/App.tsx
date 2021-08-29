@@ -12,27 +12,30 @@ import Modal from 'components/Modal';
 import RecipeForm from 'components/RecipeForm';
 
 import RecipesContext from 'context/RecipesContext';
+import { NEW_RECIPE } from 'models/recipes';
 
 const App = (): JSX.Element => {
   const {
+    recipes,
     isAddEditModalOpen,
     closeAddEditModal,
     recipeEdited,
     editRecipe,
+    addRecipe,
   } = useContext(RecipesContext);
-  console.log(isAddEditModalOpen);
+
   return (
     <>
       <GlobalStyle />
       <Title>Recipes list</Title>
       <Section>
         <RecipesList />
-        {
-          recipeEdited &&
-          <Modal heading={recipeEdited.name} onClose={closeAddEditModal} isOpen={isAddEditModalOpen}>
-            <RecipeForm onSubmit={editRecipe} recipe={recipeEdited}/>
-          </Modal>
-        }
+        <Modal heading={recipeEdited?.name || 'New recipe'} onClose={closeAddEditModal} isOpen={isAddEditModalOpen}>
+          <RecipeForm
+            onSubmit={recipeEdited ? editRecipe : addRecipe}
+            recipe={recipeEdited || { ...NEW_RECIPE, id: recipes[recipes.length - 1].id + 1 }}
+          />
+        </Modal>
         <ToastContainer position="bottom-right" />
       </Section>
     </>

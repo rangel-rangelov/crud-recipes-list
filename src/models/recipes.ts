@@ -16,6 +16,14 @@ export enum DishType {
 
 export const DISH_TYPES = ['regular', 'vegeterian', 'vegan'];
 
+export const NEW_RECIPE: Recipe = {
+  id: 1,
+  name: 'New recipe',
+  mainIngredient: 'Main ingredient',
+  ingredients: [],
+  dishType: DishType.REGULAR,
+};
+
 export const MOCK_DATA: Recipes = [
   {
     id: 1,

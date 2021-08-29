@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import Button from 'components/Button';
 
@@ -7,21 +7,22 @@ import { colors, others } from 'styles/variables';
 import { Recipe, DISH_TYPES } from 'models/recipes';
 
 interface Props {
-  onSubmit: (recipe: Recipe, id: number) => void,
-  recipe?: Recipe | null
+  onSubmit: (recipe: Recipe, id: number) => void;
+  recipe: Recipe;
 }
 
 type Inputs = Recipe;
 
-const RecipeForm = ({ onSubmit, recipe = null }: Props): JSX.Element => {
+const RecipeForm = ({ onSubmit, recipe }: Props): JSX.Element => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<Inputs>({ defaultValues: { ...recipe } || {} });
 
-  if (!recipe) return <span>todo</span>;
-
+  const ingredients = watch('ingredients');
+  console.log(ingredients);
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data, recipe.id))}>
       <Label htmlFor="id">ID</Label>
@@ -42,16 +43,18 @@ const RecipeForm = ({ onSubmit, recipe = null }: Props): JSX.Element => {
 
       <Label htmlFor="mainIngredient">Main ingredient</Label>
       <Select id="mainIngredient" {...register('mainIngredient', { required: true })}>
-        {/* 
-          I know this doesn't take dynamic value from the current form state.
-          I'm doing it like this because of a bug in react-hook-form. 
-          Given the purpose of this task, it takes too much time to find a resolution.
-        */}
+        { /* disableing eslint and ts for those lines because of some redundancy in react-hook-form */ }
+        {/* eslint-disable */}
         {
-          recipe?.ingredients.map(ingredient => (
-            <option key={ingredient} value={ingredient}>{ingredient}</option>
-          ))
+            // @ts-ignore
+            typeof ingredients === 'string' ? ingredients.split(',').map(ingredient => (
+              <option key={ingredient} value={ingredient}>{ingredient}</option>
+            ))
+            : ingredients.map(ingredient => (
+              <option key={ingredient} value={ingredient}>{ingredient}</option>
+            ))
         }
+        {/* eslint-enable */}
       </Select>
       {errors.mainIngredient && <span>{errors.mainIngredient?.message}</span>}
 
