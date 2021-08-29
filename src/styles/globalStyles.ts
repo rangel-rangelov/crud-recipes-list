@@ -11,6 +11,10 @@ const GlobalStyle = createGlobalStyle`
     line-height: 24px;
     color: ${colors.midGrey};
     background: ${colors.lighterGrey};
+
+    &.modal-open {
+      overflow: hidden;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

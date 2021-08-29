@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-import { Recipes, Recipe, MOCK_DATA } from 'models/recipes';
+import { Recipes, MOCK_DATA } from 'models/recipes';
 
 export interface IRecipesContext {
   recipes: Recipes | [],
@@ -23,7 +23,6 @@ export const RecipesProvider = ({ children }: { children: React.ReactNode }): JS
   };
 
   const expandRecipe = (id: number | null) => {
-    console.log(id);
     setData(prevState => ({
       ...prevState,
       expandedRecipeId: id,

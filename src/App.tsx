@@ -5,6 +5,7 @@ import { colors } from 'styles/variables';
 
 import Section from 'components/Section';
 import RecipesList from 'components/RecipesList';
+import Modal from 'components/Modal';
 
 import { RecipesProvider } from 'context/RecipesContext';
 
@@ -17,6 +18,9 @@ const App = (): JSX.Element => {
       <Section>
         <RecipesProvider>
           <RecipesList />
+          <Modal heading="Test" onClose={(event) => console.log(event)} isOpen={true}>
+            This is just a test
+          </Modal>
         </RecipesProvider>
       </Section>
     </>
