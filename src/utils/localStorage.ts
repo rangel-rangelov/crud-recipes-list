@@ -1,6 +1,6 @@
 import { Recipes } from 'models/recipes';
 
-export const updateStorage = (recipes: Recipes) => {
+export const updateStorage = (recipes: Recipes): void => {
   localStorage.setItem('recipes', JSON.stringify(recipes));
 };
 
