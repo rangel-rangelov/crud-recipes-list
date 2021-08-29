@@ -13,9 +13,15 @@ const Section = ({ children }: Props): JSX.Element => (
 );
 
 const StyledSection = styled.section`
-  padding: 24px;
+  margin: 0 -40px;
+  padding: 12px 0;
   background: ${colors.white};
-  border-radius: ${others.borderRadiusBig};
+  
+  @media(min-width: 768px) {
+    margin: 0;
+    padding: 24px;
+    border-radius: ${others.borderRadiusBig};
+  }
 `;
 
 export default Section;

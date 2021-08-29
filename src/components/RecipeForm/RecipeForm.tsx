@@ -47,11 +47,21 @@ const RecipeForm = ({ onSubmit, recipe }: Props): JSX.Element => {
         {/* eslint-disable */}
         {
             // @ts-ignore
-            typeof ingredients === 'string' ? ingredients.split(',').map(ingredient => (
-              <option key={ingredient} value={ingredient}>{ingredient}</option>
+            typeof ingredients === 'string' ? ingredients.split(',').map((ingredient, index) => (
+              <option
+                key={ingredient}
+                value={ingredient}
+              >
+                {ingredient}
+              </option>
             ))
-            : ingredients.map(ingredient => (
-              <option key={ingredient} value={ingredient}>{ingredient}</option>
+            : ingredients.map((ingredient, index) => (
+              <option
+                key={ingredient}
+                value={ingredient}
+              >
+                {ingredient}
+              </option>
             ))
         }
         {/* eslint-enable */}

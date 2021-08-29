@@ -72,10 +72,9 @@ const ListItem = ({
 
 const StyledListItem = styled.div<StyledProps>`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
-  padding: 4px 24px;
+  padding: 16px 24px;
   border-bottom: 1px solid ${colors.lighterGrey};
   box-shadow: ${({ type }) => {
     switch (type) {
@@ -87,6 +86,12 @@ const StyledListItem = styled.div<StyledProps>`
         return `inset 3px 0px 0px 0px ${colors.yellow}`;
     }
   }};
+
+  @media(min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
   
   &:last-of-type {
     border-bottom: none;
@@ -95,25 +100,38 @@ const StyledListItem = styled.div<StyledProps>`
 `;
 
 const Title = styled.h3`
+  margin: 0 0 12px;
   flex-basis: 40%;
   font-size: 17px;
   line-height: 24px;
   font-weight: 400;
+
+  @media(min-width: 768px) {
+    margin: 0;
+  }
 `;
 
-const Description = styled.h3`
+const Description = styled.h4`
+  margin: 0 0 12px;
   flex-basis: 40%;
   font-size: 15px;
   line-height: 20px;
   font-weight: 400;
   color: ${colors.lightGrey};
+
+  @media(min-width: 768px) {
+    margin: 0; 
+  }
 `;
 
 const ButtonHolder = styled.div`
   flex-basis: 20%;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+
+  @media(min-width: 768px) {
+    justify-content: flex-end;
+  }
 
   > * {
     margin-right: 8px;
